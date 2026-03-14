@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Amirah Collection — Sales Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@400;600&family=Syne+Mono&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --peach:       #f5c9a8;
+    --peach-light: #fde9d9;
+    --peach-bg:    #fdf5ef;
+    --teal:        #3abfb1;
+    --teal-dark:   #2a9d92;
+    --teal-light:  #d0f2ef;
+    --orange:      #e07b39;
+    --yellow:      #f5c842;
+    --navy:        #1a2e35;
+    --ink:         #2d3e45;
+    --muted:       #8ba3aa;
+    --white:       #ffffff;
+    --card-shadow: 0 4px 24px rgba(58,191,177,0.10), 0 1px 4px rgba(0,0,0,0.06);
+    --border:      rgba(58,191,177,0.18);
+  }
+
+  
+
+.logo{
+   width: 150px;
+   height: 80px;
+   object-fit: contain;
+}
+
+.section-p1{
+  padding: 40px 80px;
+}
+
+.section-m1{
+  padding: 40px 0;
+}
+
+body{
+  width: 100%;
+  font-family: inherit; 
+}
+
+#header{
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 80px;
+  background-color: #E3E6F3;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+}
+
+#navbar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity{
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  position: absolute;
+  top: -5px;
+  left: 80%;
+  padding: 3px 5px;
+  font-size: 7px; /* Fixed: missing semicolon */
+}
+
+#mobile{
+  display: none;
+  align-items: center;
+}
+
+#close{
+  display: none;
+}
+
+#navbar li{
+  list-style: none; 
+  padding: 0 20px;
+  position: relative;
+}
+
+#navbar li a{
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: 0.3s ease;
+}
+
+#navbar li a:hover,
+#navbar li a.active{
+  color: #088178;
+}
+
+#navbar li a:hover::after,
+#navbar li a.active::after{
+  content: " ";
+  width: 30%;
+  height: 2px;
+  background-color: #088178; /* Fixed: removed broken "background: 2px;" line */
+  position: absolute;
+  bottom: -4px;
+  left: 20px;
+}
+
+
+  body {
+    background: var(--peach-bg);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* WAVY TOP DECORATION */
+  .top-wave {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, #2e7d5e 0%, #3abfb1 45%, #a8e6cf 100%);
+    clip-path: ellipse(100% 75% at 50% 0%);
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 0;
+    padding-top: 400px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    padding: 2.2rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .logo-icon {
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .logo-icon img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .logo-text .shop-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.1;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  }
+
+  .logo-text .shop-sub {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #d4f5ee;
+    font-weight: 700;
+  }
+
+  .header-right {
+    background: rgba(255,255,255,0.22);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 12px;
+    padding: 0.6rem 1.2rem;
+    text-align: right;
+  }
+
+  .header-right .label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #d4f5ee;
+  }
+
+  .header-right .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: #ffffff;
+  }
+
+  /* KPI CARDS */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 1.8rem 0;
+  }
+
+  .kpi-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 1.4rem 1.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .kpi-card:nth-child(1) { animation-delay: 0.1s; }
+  .kpi-card:nth-child(2) { animation-delay: 0.2s; }
+  .kpi-card:nth-child(3) { animation-delay: 0.3s; }
+  .kpi-card:nth-child(4) { animation-delay: 0.4s; }
+
+  .kpi-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 36px rgba(58,191,177,0.18);
+  }
+
+  .kpi-card .emoji-bg {
+    position: absolute;
+    top: -8px; right: -8px;
+    font-size: 3.5rem;
+    opacity: 0.10;
+    transform: rotate(15deg);
+    pointer-events: none;
+  }
+
+  .kpi-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .icon-teal  { background: var(--teal-light); }
+  .icon-peach { background: #fde9d9; }
+  .icon-yellow{ background: #fef9e0; }
+  .icon-navy  { background: #e8f0f2; }
+
+  .kpi-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .kpi-value{
+    font-family: "Cambria Math", Cambria, serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #0a2540;
+    line-height: 1.2;
+    letter-spacing: 1px;
+}
+
+  .kpi-change {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    padding: 0.18rem 0.55rem;
+    border-radius: 20px;
+  }
+
+  .up   { background: #d0f2ef; color: var(--teal-dark); }
+  .down { background: #fde9d9; color: var(--orange); }
+
+  /* CHART CARDS */
+  .charts-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.6s ease 0.45s both;
+  }
+
+  .charts-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.6s ease 0.55s both;
+  }
+
+  .chart-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 1.6rem 1.6rem 1.4rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border);
+  }
+
+  .chart-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .chart-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal-dark);
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .chart-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+  }
+
+  .pill {
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    background: var(--teal-light);
+    color: var(--teal-dark);
+  }
+
+  canvas { display: block; width: 100% !important; }
+
+  /* TOP PRODUCTS */
+  .products-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 1.6rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 1rem;
+    animation: fadeUp 0.6s ease 0.65s both;
+  }
+
+  .product-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid #f0f5f5;
+    transition: background 0.2s;
+    border-radius: 8px;
+    padding-left: 0.5rem;
+  }
+
+  .product-row:last-child { border-bottom: none; }
+  .product-row:hover { background: var(--peach-light); }
+
+  .rank {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--peach);
+    width: 24px;
+    text-align: center;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .product-emoji {
+    font-size: 1.4rem;
+    width: 40px; height: 40px;
+    background: var(--peach-light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .product-info { flex: 1; min-width: 0; }
+  .product-name { font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+  .product-cat  { font-size: 0.72rem; color: var(--muted); }
+
+  .product-bar-wrap { width: 100px; }
+  .product-bar-bg {
+    height: 6px;
+    background: #eef4f5;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+  }
+  .product-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--teal-dark));
+  }
+  .product-bar-label { font-size: 0.68rem; color: var(--muted); text-align: right; }
+
+  .product-revenue {
+    font-family: 'Syne Mono', monospace;
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--teal-dark);
+    white-space: nowrap;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 6px 0;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    animation: fadeUp 0.6s ease 0.75s both;
+  }
+
+  
+  .dev-name{
+  color: #088178;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0 1.5rem 7rem;
+  }
+
+  .dev-name:hover{
+  text-decoration: underline;
+  }
+
+
+  footer strong { color: var(--teal-dark); }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .charts-row { grid-template-columns: 1fr; }
+    .charts-row-2 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .kpi-value { font-size: 1.6rem; }
+  }
+</style>
+
+<script src="https://kit.fontawesome.com/dad03e859c.js" crossorigin="anonymous"></script>
+  <!----------x---------------Font Awesome Icons --------x------->
+
+  <!----------x---------------Google font --------x------->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alkatra&family=Berkshire+Swash&family=Comic+Neue:wght@700&family=Gentium+Book+Plus:wght@400;700&family=Lato:ital,wght@0,400;0,700;0,900;1,700&family=Lexend+Deca:wght@500&family=Lexend:wght@500&family=Montserrat:wght@500&family=Open+Sans:wght@500;800&family=Roboto:wght@100;400&family=Sue+Ellen+Francisco&family=Work+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+      
+      <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900;&display:swap">
+       <!----------x---------------Google font --------x----------------->
+ 
+</head>
+<body>
+<section id="header">
+            <a href="#"><img src="image/logo7.png" class = "logo"></a>
+            <div>
+      <ul id="navbar">
+ <li><a href="index.html">Home</a></li>
+ <li><a href="shop.html">Shop</a></li>
+ <li><a href="blog.html">Blog</a></li>
+ <li><a href="about.html">About</a></li>
+ <li><a href="contact.html">Contact</a></li>
+ <li><a href="sales2.html" class="active">Sales Analysis</a></li>
+ <li id="lg-bag"><a href="cart.html"><i class="fas fa-shopping-bag"></i></a>
+   <span class="quantity">0</span></li>
+ <a href="#" id="close"><i class="fas fa-times"></i></a>
+                </ul>
+            </div>
+<div id="mobile">
+  <a href="cart.html" ><i class="fal fa-shopping-bag"></i>
+    <span class="quantity">0</span>
+  </a>
+  <i id="bar" class="fas fa-outdent"></i>
+</div>
+        </section>
+
+
+<div class="top-wave"></div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-area">
+      <div class="logo-icon">
+        <img src="image/logo7.png" alt="Amirah Logo">
+      </div>
+      <div class="logo-text">
+        <div class="shop-name">Amirah Collection</div>
+        <div class="shop-sub">Sales Analytics</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="label">Report Period</div>
+      <div class="value">January – December 2025</div>
+    </div>
+  </header>
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="emoji-bg"><i class="fa-solid fa-sack-dollar"></i></div>
+      <div class="kpi-icon icon-teal"><i class="fa-solid fa-sack-dollar"></i></div>
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value">₹98,400</div>
+      <div class="kpi-change up">▲ 14% vs last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="emoji-bg"><i class="fa-solid fa-bag-shopping"></i></div>
+      <div class="kpi-icon icon-peach"><i class="fa-solid fa-bag-shopping"></i></div>
+      <div class="kpi-label">Orders Placed</div>
+      <div class="kpi-value">412</div>
+      <div class="kpi-change up">▲ 9% vs last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="emoji-bg"><i class="fa-solid fa-star"></i></div>
+      <div class="kpi-icon icon-purple"><i class="fa-solid fa-star"></i></div>
+      <div class="kpi-label">Avg. Order Value</div>
+      <div class="kpi-value">₹ 239</div>
+      <div class="kpi-change up">▲ 5% vs last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="emoji-bg"><i class="fa-solid fa-rotate-left"></i></div>
+      <div class="kpi-icon icon-blue"><i class="fa-solid fa-rotate-left"></i></div>
+      <div class="kpi-label">Return Rate</div>
+      <div class="kpi-value">3.8%</div>
+      <div class="kpi-change down">▲ 0.5% vs last year</div>
+    </div>
+  </div>
+
+  <!-- MAIN CHARTS ROW -->
+  <div class="charts-row">
+    <!-- Monthly Revenue -->
+    <div class="chart-card">
+      <div class="chart-head">
+        <div>
+          <div class="chart-title">Revenue Trend</div>
+          <div class="chart-subtitle">Monthly Sales — 2024</div>
+        </div>
+        <span class="pill">₹ INR</span>
+      </div>
+      <canvas id="revenueChart" height="200"></canvas>
+    </div>
+
+    <!-- Category Donut -->
+    <div class="chart-card">
+      <div class="chart-head">
+        <div>
+          <div class="chart-title">Category Split</div>
+          <div class="chart-subtitle">By Product Type</div>
+        </div>
+      </div>
+      <canvas id="categoryChart" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- SECOND ROW -->
+  <div class="charts-row-2">
+    <!-- Quarterly bar -->
+    <div class="chart-card">
+      <div class="chart-head">
+        <div>
+          <div class="chart-title">Seasonal Sales</div>
+          <div class="chart-subtitle">Orders per Quarter</div>
+        </div>
+      </div>
+      <canvas id="quarterChart" height="190"></canvas>
+    </div>
+
+    <!-- Payment method -->
+    <div class="chart-card">
+      <div class="chart-head">
+        <div>
+          <div class="chart-title">Payment Methods</div>
+          <div class="chart-subtitle">How Customers Pay</div>
+        </div>
+      </div>
+      <canvas id="paymentChart" height="190"></canvas>
+    </div>
+  </div>
+
+  <!-- TOP PRODUCTS -->
+  <div class="products-card">
+    <div class="chart-head">
+      <div>
+        <div class="chart-title">Best Sellers</div>
+        <div class="chart-subtitle">Top Products by Revenue</div>
+      </div>
+      <span class="pill">2025 Picks 🏆</span>
+    </div>
+
+    <div class="product-row">
+      <div class="rank">1</div>
+      <div class="product-emoji">🧥</div>
+      <div class="product-info">
+        <div class="product-name">Blue Jacket</div>
+        <div class="product-cat">Western Wear · ₹600 each</div>
+      </div>
+      <div class="product-bar-wrap">
+        <div class="product-bar-bg"><div class="product-bar-fill" style="width:92%"></div></div>
+        <div class="product-bar-label">92 units</div>
+      </div>
+      <div class="product-revenue">₹55,200</div>
+    </div>
+
+    <div class="product-row">
+      <div class="rank">2</div>
+      <div class="product-emoji">👘</div>
+      <div class="product-info">
+        <div class="product-name">Anime Edition Hoodie</div>
+        <div class="product-cat">Casual Wear · ₹500 each</div>
+      </div>
+      <div class="product-bar-wrap">
+        <div class="product-bar-bg"><div class="product-bar-fill" style="width:74%"></div></div>
+        <div class="product-bar-label">74 units</div>
+      </div>
+      <div class="product-revenue">₹37,000</div>
+    </div>
+
+    <div class="product-row">
+      <div class="rank">3</div>
+      <div class="product-emoji">👕</div>
+      <div class="product-info">
+        <div class="product-name">Cool Scenery T-Shirts</div>
+        <div class="product-cat">Casual Wear · ₹300 each</div>
+      </div>
+      <div class="product-bar-wrap">
+        <div class="product-bar-bg"><div class="product-bar-fill" style="width:65%"></div></div>
+        <div class="product-bar-label">65 units</div>
+      </div>
+      <div class="product-revenue">₹19,500</div>
+    </div>
+
+    <div class="product-row">
+      <div class="rank">4</div>
+      <div class="product-emoji">🎽</div>
+      <div class="product-info">
+        <div class="product-name">Kids Wear Set</div>
+        <div class="product-cat">Kids · ₹300 each</div>
+      </div>
+      <div class="product-bar-wrap">
+        <div class="product-bar-bg"><div class="product-bar-fill" style="width:50%"></div></div>
+        <div class="product-bar-label">50 units</div>
+      </div>
+      <div class="product-revenue">₹15,000</div>
+    </div>
+
+    <div class="product-row">
+      <div class="rank">5</div>
+      <div class="product-emoji">👗</div>
+      <div class="product-info">
+        <div class="product-name">Ethnic Dress Collection</div>
+        <div class="product-cat">Ethnic Wear · ₹450 each</div>
+      </div>
+      <div class="product-bar-wrap">
+        <div class="product-bar-bg"><div class="product-bar-fill" style="width:38%"></div></div>
+        <div class="product-bar-label">38 units</div>
+      </div>
+      <div class="product-revenue">₹17,100</div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <div class="container">
+    <strong>Amirah Collection</strong> &nbsp;·&nbsp; Annual Sales Report 2025 &nbsp;·&nbsp; All amounts in ₹ INR
+  </div>
+  <div class="copyright">
+  <p>
+    © 2026 Ammera Collection | Designed & Developed by 
+    <a href="https://wa.me/918208816611?text=Hello%20Rehan%2C%20I%20found%20your%20work%20impressive%20" target="_blank" class="dev-name"> Rehan Shaikh
+    </a>
+  </p>
+</div>
+</footer>
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+
+Chart.defaults.font.family = "'Nunito', sans-serif";
+Chart.defaults.font.size = 11;
+
+const TEAL      = '#3abfb1';
+const TEAL_DARK = '#2a9d92';
+const TEAL_LIGHT= '#d0f2ef';
+const PEACH     = '#f5c9a8';
+const ORANGE    = '#e07b39';
+const YELLOW    = '#f5c842';
+const NAVY      = '#1a2e35';
+const MUTED     = '#8ba3aa';
+
+/* 1. MONTHLY REVENUE BAR+LINE */
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const monthly = [5200, 4800, 7400, 6900, 8100, 7600, 8800, 9200, 8000, 10400, 12100, 9900];
+
+const revCtx = document.getElementById('revenueChart').getContext('2d');
+const gradTeal = revCtx.createLinearGradient(0,0,0,200);
+gradTeal.addColorStop(0, 'rgba(58,191,177,0.35)');
+gradTeal.addColorStop(1, 'rgba(58,191,177,0.0)');
+
+new Chart(revCtx, {
+  type: 'bar',
+  data: {
+    labels: months,
+    datasets: [
+      {
+        type: 'line',
+        label: 'Revenue Trend',
+        data: monthly,
+        borderColor: TEAL_DARK,
+        backgroundColor: gradTeal,
+        fill: true,
+        tension: 0.45,
+        pointBackgroundColor: TEAL_DARK,
+        pointRadius: 3,
+        pointHoverRadius: 6,
+        borderWidth: 2.5,
+        yAxisID: 'y',
+        order: 1
+      },
+      {
+        type: 'bar',
+        label: 'Monthly ₹',
+        data: monthly,
+        backgroundColor: monthly.map(v => v === Math.max(...monthly)
+          ? 'rgba(224,123,57,0.85)'
+          : 'rgba(58,191,177,0.18)'),
+        borderRadius: 6,
+        borderSkipped: false,
+        yAxisID: 'y',
+        order: 2
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: NAVY,
+        titleColor: TEAL_LIGHT,
+        bodyColor: '#fff',
+        borderColor: TEAL,
+        borderWidth: 1,
+        callbacks: { label: ctx => ` ₹${ctx.parsed.y.toLocaleString('en-IN')}` }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: MUTED } },
+      y: {
+        grid: { color: 'rgba(58,191,177,0.08)' },
+        ticks: { color: MUTED, callback: v => '₹'+v/1000+'k' }
+      }
+    }
+  }
+});
+
+/* 2. DONUT - CATEGORY */
+new Chart(document.getElementById('categoryChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Western Wear','Kids Wear','Casual Wear','Ethnic Wear','Accessories'],
+    datasets: [{
+      data: [34, 18, 22, 17, 9],
+      backgroundColor: [TEAL, PEACH, YELLOW, ORANGE, '#b2dfd9'],
+      borderColor: '#fff',
+      borderWidth: 3,
+      hoverOffset: 10
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '65%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          color: MUTED, usePointStyle: true, pointStyleWidth: 8,
+          padding: 10, font: { size: 10, weight: '700' }
+        }
+      },
+      tooltip: {
+        backgroundColor: NAVY,
+        titleColor: TEAL_LIGHT,
+        bodyColor: '#fff',
+        borderColor: TEAL,
+        borderWidth: 1,
+        callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` }
+      }
+    }
+  }
+});
+
+/* 3. QUARTERLY ORDERS */
+new Chart(document.getElementById('quarterChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Q1 (Jan–Mar)','Q2 (Apr–Jun)','Q3 (Jul–Sep)','Q4 (Oct–Dec)'],
+    datasets: [{
+      label: 'Orders',
+      data: [82, 94, 108, 128],
+      backgroundColor: [
+        'rgba(245,201,168,0.85)',
+        'rgba(58,191,177,0.55)',
+        'rgba(58,191,177,0.75)',
+        'rgba(58,191,177,0.95)'
+      ],
+      borderRadius: 8,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: NAVY,
+        titleColor: TEAL_LIGHT,
+        bodyColor: '#fff',
+        borderColor: TEAL,
+        borderWidth: 1,
+        callbacks: { label: ctx => ` ${ctx.parsed.y} orders` }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: MUTED } },
+      y: {
+        grid: { color: 'rgba(58,191,177,0.08)' },
+        ticks: { color: MUTED }
+      }
+    }
+  }
+});
+
+/* 4. PAYMENT METHODS - HORIZONTAL BAR */
+new Chart(document.getElementById('paymentChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Cash on Delivery','UPI / GPay','Debit / Credit Card','Net Banking','Wallets'],
+    datasets: [{
+      label: 'Orders',
+      data: [168, 142, 62, 28, 12],
+      backgroundColor: [ORANGE, TEAL, YELLOW, PEACH, '#b2dfd9'],
+      borderRadius: 6,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: NAVY,
+        titleColor: TEAL_LIGHT,
+        bodyColor: '#fff',
+        borderColor: TEAL,
+        borderWidth: 1,
+        callbacks: { label: ctx => ` ${ctx.parsed.x} orders` }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: 'rgba(58,191,177,0.08)' },
+        ticks: { color: MUTED }
+      },
+      y: {
+        grid: { display: false },
+        ticks: { color: MUTED, font: { size: 10, weight: '700' } }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

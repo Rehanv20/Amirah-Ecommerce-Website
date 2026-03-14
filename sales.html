@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sales Analysis</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+font-family: Arial;
+background:#f4f4f4;
+text-align:center;
+padding:40px;
+}
+
+.chart-container{
+width:70%;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+button{
+padding:10px 20px;
+margin:5px;
+border:1px solid gray;
+background:#eee;
+cursor:pointer;
+}
+
+button:hover{
+background:#088178;
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="chart-container">
+
+<h2>Sales Analysis</h2>
+
+<!-- Buttons -->
+<button onclick="changeChart('bar')">Bars</button>
+<button onclick="changeChart('line')">Line</button>
+<button onclick="changeChart('doughnut')">Doughnut</button>
+<button onclick="changeChart('polarArea')">PolarArea</button>
+<button onclick="changeChart('radar')">Radar</button>
+
+<br><br>
+
+<canvas id="myChart"></canvas>
+
+</div>
+
+<script>
+
+let chart;
+
+const data = {
+labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+datasets: [{
+label: 'Sales',
+data: [1200,1900,800,1300,1000,1250],
+backgroundColor:[
+'#088178','#f39c12','#e74c3c','#3498db','#9b59b6','#2ecc71'
+]
+}]
+};
+
+function createChart(type){
+
+if(chart){
+chart.destroy();
+}
+
+chart = new Chart(document.getElementById('myChart'), {
+type:type,
+data:data,
+options:{
+responsive:true
+}
+});
+
+}
+
+function changeChart(type){
+createChart(type);
+}
+
+// default chart
+createChart('bar');
+
+</script>
+
+</body>
+</html>
